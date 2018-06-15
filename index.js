@@ -27,6 +27,7 @@ firebase.auth().onAuthStateChanged(function(user) {
   }
 });
 
+
 function login(){
 
   var userEmail = document.getElementById("email_field").value;
@@ -96,5 +97,71 @@ function aparece(){
   `;
 
 }
-logout();
+//logout();
 observar();
+
+
+function writeUserData(name, description, image, uid) {
+  firebase.database().ref('contenido/'+ uid).set({
+    nombre: name,
+    descripcion: description,
+    imagen : image
+  });
+}
+
+
+function agregar(){
+
+var user = firebase.auth().currentUser;
+var uid = user.uid;
+
+var name = document.getElementById("nombre_contenido").value;
+var description = document.getElementById("descripcion_contenido").value;
+var image= document.getElementById("imagen_contenido").value;
+
+writeUserData(name,description,image,uid);
+
+
+ }
+
+
+
+//Funcion para detectar eventos en la base de datos
+//Referencia a nuestra base de datos contenido/
+var contenidoref = firebase.database().ref('contenido/');
+contenidoref.on('value', function(snapshot) {
+  //SE ejecuta al iniciar
+  console.log("Se ha actualizado la base de datos");
+});
+
+
+//Lectura de datos
+function leer(){
+
+//Del usuario que este actualmente logea, obtenemos su user id
+var curso = document.getElementById("curso_nombre").value;
+var userId = firebase.auth().currentUser.uid;
+//Se muestra al darle clic
+//Mostramos todos los datos del usuario
+return firebase.database().ref('/contenido/' + curso).once('value').then(function(snapshot) {
+  var nombre = snapshot.val().nombre;
+  var descripcion = snapshot.val().descripcion;
+  var imagen = snapshot.val().imagen;
+  //Mostrando datos 
+
+  var contenido_total= `
+  <p>${nombre}</p> 
+  <p>${descripcion}</p>
+  <img src="${imagen}"></img>
+
+  `
+  
+  //Mostrando datos en el div "Lista_contenidos"
+  document.getElementById("lista_contenidos").innerHTML =contenido_total
+  // ...
+});
+
+
+}
+
+
