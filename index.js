@@ -165,3 +165,84 @@ return firebase.database().ref('/contenido/' + curso).once('value').then(functio
 }
 
 
+
+// -------------------------------------
+//  Storage firebase
+// -------------------------------------
+
+
+// Referencia a nuestro storage
+var storageRef = firebase.storage().ref();
+
+
+function upload(){
+
+//Nombre del archivo que estamos subiendo
+var nombre_archivo = document.getElementById('fileItem').files[0].name;
+
+//Referencia a la ruta del archivo
+var ImagesRef = storageRef.child('images/' + nombre_archivo);
+
+
+var file = document.getElementById('fileItem').files[0];
+ImagesRef.put(file).then(function(snapshot) {
+  console.log('Uploaded a blob or file!');
+});
+
+}
+
+function search(){
+var nombre_archivo = document.getElementById('searched').value;
+// Create a reference to the file we want to download
+var starsRef = storageRef.child('images/' + nombre_archivo);
+
+// Get the download URL
+starsRef.getDownloadURL().then(function(url) {
+  // Insert url into an <img> tag to "download"
+  console.log(url);
+
+  var img_buscada = `
+  <img src="${url}"></img>
+
+  `
+
+  //Mostrando datos en el div "Lista_contenidos"
+  document.getElementById("busqueda").innerHTML = img_buscada
+
+}).catch(function(error) {
+
+  // A full list of error codes is available at
+  // https://firebase.google.com/docs/storage/web/handle-errors
+  switch (error.code) {
+    case 'storage/object_not_found':
+      // File doesn't exist
+      break;
+
+    case 'storage/unauthorized':
+      // User doesn't have permission to access the object
+      break;
+
+    case 'storage/canceled':
+      // User canceled the upload
+      break;
+
+    case 'storage/unknown':
+      // Unknown error occurred, inspect the server response
+      break;
+  }
+});
+
+
+}
+
+
+// -------------------------------------
+//  Juntando todo en final.html
+// -------------------------------------
+
+
+
+
+
+
+

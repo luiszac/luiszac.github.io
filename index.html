@@ -1,6 +1,7 @@
 <html>
 <head>
   <title>Firebase Login</title>
+  <meta charset="utf-8">
   <link href="https://fonts.googleapis.com/css?family=Nunito:400,600,700" rel="stylesheet">
   <link rel="stylesheet" href="style.css" />
   <link rel="stylesheet" href="css/bulma.min.css">
@@ -50,7 +51,7 @@
 
   <div id="contenido">
     <p>Bienvenido!</p>
-    <p>Agrega contenidos a tu lista</p>
+    <h1>Agrega contenidos a tu lista</h1>
     <p>Nombre</p>
     <input type="text" id="nombre_contenido">
     <p>Descripcion</p>
@@ -67,6 +68,24 @@
 
 
   </div>
+
+  <img src="https://cdn-images-1.medium.com/max/840/1*wiNrwnAnwjBzbjlXUgrj6A.png">
+
+  <div id="storage_firebase">
+      <h1>Sube tu archivo aquí</h1>
+      <input type="file" id="fileItem">
+      <button onclick="upload()">Subir</button>
+      <h1>Busca un archivo</h1>
+      <input type="text" id="searched">
+      <button onclick="search()">Buscar</button>
+
+      <div id="busqueda">
+        
+
+      </div>
+
+  </div>
+  <a href="final.html" style="text-align: center;">Llévame a otra página</a>
 
 
 
