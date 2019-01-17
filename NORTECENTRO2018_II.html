@@ -70,13 +70,13 @@
     { ratio: 0.5, color: "rgba(255, 213, 0, 1)" },
     { ratio: 0.6, color: "rgba(255, 170, 0, 1)" },
     { ratio: 0.7, color: "rgba(255, 128, 0, 1)" },
-    { ratio: 0.8, color: "rgba(255, 85, 0, 1)" },
-    { ratio: 0.9, color: "rgba(255, 42, 0, 1)" },
-    { ratio: 1, color: "rgba(255, 0, 0, 1)" }
+    { ratio: 0.8, color: "rgba(190, 85, 0, 1)" },
+    { ratio: 0.9, color: "rgba(170, 42, 0, 1)" },
+    { ratio: 1, color: "rgba(200, 20, 0, 1)" }
   ],
-        maxPixelIntensity: 10,
-        minPixelIntensity: 0,
-        blurRadius: 1,
+        //maxPixelIntensity: 5000,
+        //minPixelIntensity: 0,
+        blurRadius: 3,
       };
 
       const layer = new CSVLayer({
@@ -91,7 +91,7 @@
 
 
       const map = new Map({
-        basemap: "hybrid", //topo
+        basemap: "osm", //https://developers.arcgis.com/javascript/latest/api-reference/esri-WebMap.html#portalItem
         layers: [layer]
 
       });
@@ -109,7 +109,7 @@
 
       view.ui.add(new Legend({
         view: view
-      }), "bottom-left");
+      }), "bottom-right");
 
 
 
@@ -151,7 +151,7 @@
       var polyline = {
         type: "polyline", 
         color: "lightblue",
-        width: 1,// autocasts as new Polyline()
+        width: 0.5,// autocasts as new Polyline()
         paths: [
           [-70.51993809,-18.350675],
 [-70.52006094,-18.35063722],
