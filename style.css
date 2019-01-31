@@ -253,3 +253,42 @@ i.icss-book:after {
   transform: rotate(-5deg);
   margin: -1em 0;
 }
+
+
+
+
+
+#Panel-info{
+  position: absolute;
+  z-index: 3;
+}
+
+header{
+position: fixed;
+z-index: 23;
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
