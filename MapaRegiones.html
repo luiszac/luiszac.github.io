@@ -53,11 +53,11 @@ Creado por Luis Zacarias Huaringa Mosquera
       </div>
 
 
-      <table style="background-color: white;">
+      <table>
   <thead>
     <tr>
       <th colspan="3">         <div class="infos">
-          <i class="fa maki-bus" title="building" style="opacity: 0.1"></i>
+          <i class="fa maki-bus" title="building" style="opacity: 0.05"></i>
       </div> </th>
     </tr>
   </thead>
@@ -112,6 +112,7 @@ Creado por Luis Zacarias Huaringa Mosquera
 //Coordinates DPA VERDES
 var dpa=[];
 var dpaname=[];
+var matrix = [ [1,2],[4],[35],[46] ];
 
 
 
@@ -280,12 +281,23 @@ tnt[12] = [-8716802.268613, -1084029.935140];
 //-TYPE 0: OPERATIVOS EN CARRETERAS
 var car=[];
 
+var cartman=[[],[],[],[]];
+
+
 //ANCASH
 car[0] = [-8747147.768842, -999567.018885];
 car[1] = [-8751256.259113, -1009924.236218];
 car[2] = [-8746975.785529, -1015790.778139];
 car[3] = [-8735682.214600, -1026434.634327];
 car[4] = [-8723547.836359, -1053818.199711];
+
+
+//COORDENADAS, NOMBRE, REGION, DESCRIPCION
+cartman[0] = [ [-8747147.768842, -999567.018885], "Pesca con esxplivos", "Ancash", "Pesca explsiva"];
+cartman[1] = [ [-8751256.259113, -1009924.236218], "a con esxplivos", "Ancash", "Pesca explosiva"];
+cartman[2] = [ [-8746975.785529, -1015790.778139], "Pen eplivos", "Ancash", "Pesca explsiva kBUM"];
+cartman[3] = [ [-8735682.214600, -1026434.634327], "Pescn esxplivos", "Ancash", "Pesca explsiva JE"];
+cartman[4] = [ [-8723547.836359, -1053818.199711], "Pesxplivos", "Ancash", "Pesca explsivaaaaaaa"];
 
 
 
@@ -310,28 +322,36 @@ car[4] = [-8723547.836359, -1053818.199711];
 map.projection
 
   // CLUSTER PARA EL DPA
+  var D = dpa.length;
+  var C = car.length;
+  var T = tnt.length;
+
   function addFeatures(nb) {
     var ext = map.getView().calculateExtent(map.getSize());
     var features=[];
-    for (var i=0; i<=57; ++i) {
+
+    //PARA PUERTOS
+    for (var i=0; i<=D-1; ++i) {
       features[i] = new ol.Feature(new ol.geom.Point(dpa[i]));
       features[i].set('id',i);
       features[i].set('type', 1);
             features[i].set('name', dpaname[i]);   //Cantidad de colores, clases de clousters
     }
 
-    for (var i=0; i<=4; ++i) {
-      features[i+58] = new ol.Feature(new ol.geom.Point(car[i]));
-      features[i+58].set('id',i+58);
-      features[i+58].set('type', 0); 
-      features[i+58].set('name', 'Operativos en carreteras');  //Cantidad de colores, clases de clousters
+    //PARA OPERATIVOS EN CARRETERA
+    for (var i=0; i<=C-1; ++i) {
+      features[i+D] = new ol.Feature(new ol.geom.Point(car[i]));
+      features[i+D].set('id',i+D);
+      features[i+D].set('type', 0); 
+      features[i+D].set('name', 'Operativos en carreteras');  //Cantidad de colores, clases de clousters
     }
 
-    for (var i=0; i<=12; ++i) {
-      features[i+63] = new ol.Feature(new ol.geom.Point(tnt[i]));
-      features[i+63].set('id',i+63);
-      features[i+63].set('type', 2); 
-      features[i+63].set('name', 'Pesca con Chinchorro y Explosivos');  //Cantidad de colores, clases de clousters
+    //PARA PESCA CON EXPLOSIVOS Y CHINCHORRO
+    for (var i=0; i<=T-1; ++i) {
+      features[i+D+C] = new ol.Feature(new ol.geom.Point(tnt[i]));
+      features[i+D+C].set('id',i+D+C);
+      features[i+D+C].set('type', 2); 
+      features[i+D+C].set('name', 'Pesca con Chinchorro y Explosivos');  //Cantidad de colores, clases de clousters
     }
 
 

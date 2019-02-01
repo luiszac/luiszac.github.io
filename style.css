@@ -263,7 +263,7 @@ i.icss-book:after {
 #Panel-info{
   position: absolute;
   z-index: 3;
-  margin-top: 32%;
+  margin-top: 33%;
 }
 
 header{
@@ -284,6 +284,10 @@ header p{
 
 }
 
+#Panel-info table{
+  background-color: white;
+  width: 100%;
+}
 
 
 
