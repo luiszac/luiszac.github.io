@@ -6,7 +6,7 @@ Creado por Luis Zacarias Huaringa Mosquera
 
 ------------------------------------------------------------>
 <head>
-	<title>MAPA DE PUNTOS DE INTERES</title>
+	<title>PUNTOS DE FISCALIZACION Y CONTROL</title>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="description" content="A cluster layer for OpenLayers (ol/ol3) that animates clusters on zoom change." />
 	<meta name="keywords" content="ol3,cluster,charts,animation,layer,selectio,animate,animated clusters,openlayers" />
@@ -45,48 +45,27 @@ Creado por Luis Zacarias Huaringa Mosquera
   -->
 	<!-- DIV pour la carte -->
   <header>
-    <p>MAPA REGIONAL CON UBICACIONES DE INTERES</p>
+    <p>PUNTOS DE FISCALIZACIÓN Y CONTROL</p>
   </header>
-  <div id="Panel-info">
+
       <div id="leyenda">
           <img src="LEYENDAIMG.png">
       </div>
 
 
-      <table>
-  <thead>
-    <tr>
-      <th colspan="3">         <div class="infos">
-          <i class="fa maki-bus" title="building" style="opacity: 0.05"></i>
-      </div> </th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>  </td>
-      <td>Región:</td>
-      <td> $12 </td>
-      <td> 2 </td>
-    </tr>
-    <tr>
-      <td>  </td>
-      <td>Descripción:</td>
-      <td> $11 </td>
-      <td> 3 </td>
-    </tr>
-  </tbody>
-  <tfoot>
-    <tr>
-      <td colspan="2"> Totales</td>
-      <td class="PrecioTotal"> $23 </td>
-      <td class="CantidadTotal"> 5 </td>
-    </tr>
-  </tfoot>
-</table>
+  <div id="Panel-info">
+          <div class="infos"> 
+             
+
+ <i class="fa maki-bus" title="building" style="opacity: 0.05"></i> </thead>
+
+          </div>
+      
+
 
   </div>
 
-	<div id="map" style="width:100%; height:100%;"></div>
+	<div id="map" style="width:100%; height:95%;"></div>
 
 
 	<!--
@@ -109,166 +88,110 @@ Creado por Luis Zacarias Huaringa Mosquera
 
 	<script type="text/javascript">
 
-//Coordinates DPA VERDES
-var dpa=[];
-var dpaname=[];
-var matrix = [ [1,2],[4],[35],[46] ];
+//Coordinates DPA AZULES EPSG:900913 GOOGLE MAPS GLOBAL MERCATOR
+var ports=[[],[],[],[]];
 
 
 
 //ANCASH
-dpa[0] = [-8752727.671907, -1008854.117822];//AUTRAL GROUP SA
-dpaname[0]='AUSTRAL GROUP S.A.';
-dpa[1] = [-8750128.812946, -1014625.113457]; //MUEELLE ENAPU
-dpaname[1]='MUELLE ENAPU';
-dpa[2] = [-8748619.181637, -1014873.533799];//DPA CHIMBOTE
-dpaname[2]='DPA CHIMBOTE';
-dpa[3] = [-8747931.248382, -1015313.046712];//MUELLE UGLAN SA
-dpaname[3]='MUELLE UGLAN S.A.';
-dpa[4] = [-8747319.752156, -1015771.668882];//MUELLE VLACAR SA
-dpaname[4]='MUELLE VLACAR S.A.';
-dpa[5] = [-8746861.129986, -1016077.416995];//MUELLE NAFTES SA
-dpaname[5]='MUELLE NAFTES S.A.';
-dpa[6] = [-8746517.163359, -1016631.585450];//MUELLE PRINCIPAL CENTENARIO
-dpaname[6]='MUELLE PRINCIPAL CENTENARIO';
-dpa[7] = [-8739465.847500, -1035091.127781];//MUELE CASAMAR SA
-dpaname[7]='MUELLE CASAMAR S.A.';
-dpa[8] = [-8735567.559057, -1043136.125008];//DPA CHIMUS
-dpaname[8]='DPA CHIMUS';
-dpa[9] = [-8726643.536005, -1058022.236266];//DPA CASMA
-dpaname[9]='DPA CASMA';
+ports[0] = [ [-8752727.671907, -1008854.117822], "AUTRAL GROUP SA","Ancash","Muelle de desembarque Descarga de anchoveta"];  //AUTRAL GROUP SA
+ports[1] = [ [-8750128.812946, -1014625.113457], "MUEELLE ENAPU","Ancash","Descarga de Anchoveta, jurel y caballa"];   //MUEELLE ENAPU
+ports[2] = [ [-8748619.181637, -1014873.533799], "DPA CHIMBOTE","Ancash","Descarga de Anchoveta,jurel y caballa, bonito, tiburón, siforpa"];  //DPA CHIMBOTE
+ports[3] = [ [-8747931.248382, -1015313.046712], "MUELLE UGLAN SA","Ancash","Descarga de Anchoveta, bonito, tiburón, siforpa"];  //MUELLE UGLAN SA
+ports[4] = [ [-8747319.752156, -1015771.668882], "MUELLE VLACAR SA","Ancash","Descarga de Anchoveta, bonito, tiburón, siforpa"];  //MUELLE VLACAR SA
+ports[5] = [ [-8746861.129986, -1016077.416995], "MUELLE NAFTES SA","Ancash","Descarga de Anchoveta, jurel y caballa, bonito"];  //MUELLE NAFTES SA
+ports[6] = [ [-8746517.163359, -1016631.585450], "MUELLE PRINCIPAL CENTENARIO","Ancash","Descarga de Anchoveta, jurel y caballa, bonito, tiburón, siforpa"];  //MUELLE PRINCIPAL CENTENARIO
+ports[7] = [ [-8739465.847500, -1035091.127781], "MUELLE CASAMAR SA","Ancash","Descarga de Anchoveta, jurel y caballa, bonito, tiburón, siforpa"];  //MUELE CASAMAR SA
+ports[8] = [ [-8735567.559057, -1043136.125008], "DPA CHIMUS","Ancash","Descarga de Anchoveta, jurel y caballa, bonito, tiburón, siforpa"];  //DPA CHIMUS
+ports[9] = [ [-8726643.536005, -1058022.236266], "DPA CASMA","Ancash","Descarga de Anchoveta, jurel y caballa, bonito, tiburón, siforpa"];  //DPA CASMA
 
 
 //LIMA
-dpa[10] = [-8702661.418380, -1130656.522394]; //ENAPU SUPE
-dpaname[10]='ENAPU SUPE';
-dpa[11] = [-8639065.810847, -1256471.870952]; //ENAPU HUACHO
-dpaname[11]='ENAPU HUACHO';
-dpa[12] = [-8642123.291979, -1256471.870952]; //DPA HUACHO
-dpaname[12]='DPA HUACHO';
-dpa[13] = [-8602528.911327, -1294537.511038]; //DPA CHANCAY
-dpaname[13]='DPA CHANCAY';
-dpa[14] = [-8590298.986801, -1316551.375184]; //MOLO MUELLE DE ANCON
-dpaname[14]='MOLO MUELLE DE ANCON';
-dpa[15] = [-8588158.750009, -1333367.521407]; //MUELLE TASA
-dpaname[15]='MUELLE TASA';
-dpa[16] = [-8587088.631613, -1338412.365273]; //MUELLE CENTENARIO
-dpaname[16]='MUELLE CENTENARIO';
-dpa[17] = [-8587088.631613, -1346973.312441]; //MUELLE DESEMBARCADERO PUERTOS DEL PACIFICO S.A.
-dpaname[17]='MUELLE DESEMBARCADERO PUERTOS DEL PACIFICO S.A.';
-dpa[18] = [-8588005.875953, -1348807.801120]; //DPA CALLAO
-dpaname[18]='DPA CALLAO';
-dpa[19] = [-8575317.329257, -1361037.725646]; //DPA CHORRILLOS
-dpaname[19]='DPA CHORRILLOS';
-dpa[20] = [-8549022.991527, -1400632.106298]; //DPA PUCUSANA
-dpaname[20]='DPA PUCUSANA';
-dpa[21] = [-8513861.958516, -1462393.225152]; //DPA CERRO AZUL
-dpaname[21]='DPA CERRO AZUL';
+ports[10] = [ [-8702661.418380, -1130656.522394], "ENAPU SUPE","Lima",""];   //ENAPU SUPE
+ports[11] = [ [-8639065.810847, -1256471.870952], "ENAPU HUACHO","Lima",""];   //ENAPU HUACHO
+ports[12] = [ [-8642123.291979, -1256471.870952], "DPA HUACHO","Lima",""];   //DPA HUACHO
+ports[13] = [ [-8602528.911327, -1294537.511038], "DPA CHANCAY","Lima",""];   //DPA CHANCAY
+ports[14] = [ [-8590298.986801, -1316551.375184], "MOLO MUELLE DE ANCON","Lima",""];   //MOLO MUELLE DE ANCONANCON';
+ports[15] = [ [-8588158.750009, -1333367.521407], "MUELLE TASA","Lima",""];   //MUELLE TASATASA';
+ports[16] = [ [-8587088.631613, -1338412.365273], "MUELLE CENTENARIO","Lima",""];   //MUELLE CENTENARIOCENTENARIO';
+ports[17] = [ [-8587088.631613, -1346973.312441], "MUELLE DESEMBARCADERO PUERTOS DEL PACIFICO S.A.","Lima",""];   //MUELLE DESEMBARCADERO PUERTOS DEL PACIFICO S.A.
+ports[18] = [ [-8588005.875953, -1348807.801120], "DPA CALLAO","Lima",""];   //DPA CALLAO
+ports[19] = [ [-8575317.329257, -1361037.725646], "DPA CHORRILLOS","Lima",""];   //DPA CHORRILLOS
+ports[20] = [ [-8549022.991527, -1400632.106298], "DPA PUCUSANA","Lima",""];   //DPA PUCUSANA
+ports[21] = [ [-8513861.958516, -1462393.225152], "DPA CERRO AZUL","Lima",""];   //DPA CERRO AZULAZUL';
 
 //AREQUIPA
-dpa[22] = [-8331559.646056, -1754153.362117]; //DPA LOMAS
-dpaname[22]='DPA LOMAS';
-dpa[23] = [-8265365.179561, -1789620.143241]; //DPA CHALA
-dpaname[23]='DPA CHALA';
-dpa[24] = [-8194355.180284, -1831431.197713]; //DPA ATICO
-dpaname[24]='DPA ATICO';
-dpa[25] = [-8160187.828641, -1846947.914455]; //IPA LA PLANCHADA
-dpaname[25]='IPA LA PLANCHADA';
-dpa[26] = [-8084744.481723, -1881191.703126]; //IPA QUILCA
-dpaname[26]='IPA QUILCA';
-dpa[27] = [-8027263.836453, -1922161.950287]; //DPP MATARANI
-dpaname[27]='DPA MATARANI';
+ports[22] = [ [-8331559.646056, -1754153.362117], "DPA LOMAS","Arequipa",""];   //DPA LOMAS
+ports[23] = [ [-8265365.179561, -1789620.143241], "DPA CHALA","Arequipa",""];   //DPA CHALA
+ports[24] = [ [-8194355.180284, -1831431.197713], "DPA ATICO","Arequipa",""];   //DPA ATICO
+ports[25] = [ [-8160187.828641, -1846947.914455], "IPA LA PLANCHADA","Arequipa",""];   //IPA LA PLANCHADAPLANCHADA';
+ports[26] = [ [-8084744.481723, -1881191.703126], "IPA QUILCA","Arequipa",""];   //IPA QUILCA
+ports[27] = [ [-8027263.836453, -1922161.950287], "DPP MATARANI","Arequipa",""];   //DPP MATARANI
 
 //MOQUEGUA Y TACNA
-dpa[28] = [-7942036.549915, -1995847.245554]; //DPA ILO
-dpaname[28]='DPA ILO';
-dpa[29] = [-7908710.005582, -2023441.012765]; //CALETA PUNTA PICATA
-dpaname[29]='CALETA PUNTA PICATA';
-dpa[30] = [-7890823.740964, -2037352.551913]; //DPA MORRO SAMA
-dpaname[30]='DPA MORRO SAMA';
-dpa[31] = [-7873472.535543, -2050805.468891]; //DPA VILA
-dpaname[31]='DPA VILA';
+ports[28] = [ [-7942036.549915, -1995847.245554], "DPA ILO","Moquegua",""];   //DPA ILO
+ports[29] = [ [-7908710.005582, -2023441.012765], "CALETA PUNTA PICATA","Moquegua",""];   //CALETA PUNTA PICATAPICATA';
+ports[30] = [ [-7890823.740964, -2037352.551913], "DPA MORRO SAMA","Tacna",""];   //DPA MORRO SAMASAMA';
+ports[31] = [ [-7873472.535543, -2050805.468891], "DPA VILA","Tacna",""];   //DPA VILA
 
 //ICA
-dpa[32] = [-8485427.383994, -1543110.727021]; //DPA SAN ANDRES 1,2,3,4
-dpaname[32]='DPA SAN ANDRES';
-dpa[33] = [-8486038.880220, -1547085.452492];
-dpaname[33]='DPA SAN ANDRES';
-dpa[34] = [-8487414.746729, -1551060.177963];
-dpaname[34]='DPA SAN ANDRES';
-dpa[35] = [-8495669.945784, -1562372.858149];
-dpaname[35]='DPA SAN ANDRES';
-dpa[36] = [-8367943.671520, -1731050.270317]; //DPA SAN JUAN MARCONA
-dpaname[36]='DPA SAN JUAN MARCONA';
+ports[32] = [ [-8485427.383994, -1543110.727021], "DPA SAN ANDRES","Ica","EP Artesanales sin permiso de pesca, incremento de inseguridad y agresión"];   //DPA SAN ANDRES 1,2,3,4
+ports[33] = [ [-8486038.880220, -1547085.452492], "DPA SAN ANDRES","Ica","EP Artesanales sin permiso de pesca, incremento de inseguridad y agresión"];  
+ports[34] = [ [-8487414.746729, -1551060.177963], "DPA SAN ANDRES","Ica","EP Artesanales sin permiso de pesca, incremento de inseguridad y agresión"];  
+ports[35] = [ [-8495669.945784, -1562372.858149], "DPA SAN ANDRES","Ica","EP Artesanales sin permiso de pesca, incremento de inseguridad y agresión"];  
+ports[36] = [ [-8367943.671520, -1731050.270317], "DPA SAN ANDRES","Ica","EP Artesanales sin permiso de pesca, incremento de inseguridad y agresión"];   //DPA SAN JUAN MARCONAMARCONA';
 
 //TUMBES
 
-dpa[37] = [-8949094.397572, -390287.466424]; //DPA PUERTO PIZARRO
-dpaname[37]='DPA PUERTO PIZARRO';
-dpa[38] = [-8972178.380114, -404504.753685]; //PLAYA LA CRUZ
-dpaname[38]='PLAYA LA CRUZ';
-dpa[39] = [-8978293.342377, -408785.227269]; //PLAYA CALETA GRAU
-dpaname[39]='PLAYA CALETA GRAU';
-dpa[40] = [-8993274.999921, -420862.277738]; // DPA ACAPULCO
-dpaname[40]='DPA ACAPULCO';
-dpa[41] = [-9006422.168786, -436914.053678]; //PLAYA PUNTA MERO
-dpaname[41]='PLAYA PUNTA MERO';
-dpa[42] = [-9011008.390483, -441806.023488]; //DPA CANCAS
-dpaname[42]='DPA CANCAS';
+ports[37] = [ [-8949094.397572, -390287.466424], "DPA PUERTO PIZARRO","Tumbes",""];   //DPA PUERTO PIZARROPIZARRO';
+ports[38] = [ [-8972178.380114, -404504.753685], "PLAYA LA CRUZ","Tumbes",""];   //PLAYA LA CRUZ
+ports[39] = [ [-8978293.342377, -408785.227269], "PLAYA CALETA GRAU","Tumbes",""];   //PLAYA CALETA GRAU
+ports[40] = [ [-8993274.999921, -420862.277738], "DPA ACAPULCO","Tumbes",""];   // DPA ACAPULCO
+ports[41] = [ [-9006422.168786, -436914.053678], "PLAYA PUNTA MERO","Tumbes",""];   //PLAYA PUNTA MERO
+ports[42] = [ [-9011008.390483, -441806.023488], "DPA CANCAS","Tumbes",""];  //DPA CANCAS
 
 
 //PIURA Y PAITA
-dpa[43] = [-9022779.692839, -457552.051315]; //DPA MANCORA
-dpaname[43]='DPA MANCORA';
-dpa[44] = [-9027977.410762, -465042.880087]; //DPA LOS ORGANOS
-dpaname[44]='DPA LOS ORGANOS';
-dpa[45] = [-9039901.587175, -471922.212633]; //DPA EL ÑURO
-dpaname[45]='DPA EL ÑURO';
-dpa[46] = [-9048462.534343, -504637.260739]; //MUELLE TERMINAL PESQUERO ZONAL DE TALARA
-dpaname[46]='MUELLE TERMINA PESQUERO ZONAL DE TALARA';
-dpa[47] = [-9023696.937178, -560283.417330]; //MUELLE IBT
-dpaname[47]='MUELLE IBT';
-dpa[48] = [-9031187.765950, -565481.135254]; //DPA MI MANUELITO
-dpaname[48]='DPA MI MANUELITO';
-dpa[49] = [-9036079.735760, -572666.215913]; //MUELLE DE PESQ HAYDUK SA
-dpaname[49]='MUELLE DE PESQUERA HAYDUK S.A.';
-dpa[50] = [-9035621.113591, -574194.956478]; //MUELLE DE ESTACION NAVAL DE PAITA
-dpaname[50]='MUELLE DE ESTACION NAVAL DE PAITA';
-dpa[51] = [-9035621.113591, -576793.815440]; //MUELLE CONSERVERA LAS AMERICAS
-dpaname[51]='MUELLE CONSERVERA LAS AMERICAS';
-dpa[52] = [-9036538.357930, -578169.681949]; //MUELLE DE INDUSTRIA ATUNERA
-dpaname[52]='MUELLE DE INDUSTRIA ATUNERA';
-dpa[53] = [-9038067.098496, -580309.918741]; //MUELLE DE PESQ NIVAMA
-dpaname[53]='MUELLE DE PESQUERA NIVAMA';
-dpa[54] = [-9036385.483874, -582755.903646]; //MUELLE DE IND PESQ SANTA MONICA
-dpaname[54]='MUELLE DE INDUSTRIA PESQUERA SANTA MONICA';
-dpa[55] = [-9026601.544253, -591316.850814]; //MUELLE DE PESQ. EXALMAR.
-dpaname[55]='MUELLE DE PESQ. EXALMAR';
-dpa[56] = [-9001377.324919, -624949.143260]; //MUELLE PESCA Y TRANSPORTE SA (EX DP JUAN PABLO)
-dpaname[56]='MUELLE DE PESCA Y TRANSPORTE S.A. (EX DP SAN PABLO)';
-dpa[57] = [-9012537.131049, -652160.725329]; //DPA GALILEO
-dpaname[57]='DPA GALILEO';
-//dpa[42] = [-901100390483, -4418063488]; //
+ports[43] = [ [-9022779.692839, -457552.051315], "DPA MANCORA","Piura",""];  //DPA MANCORA
+ports[44] = [ [-9027977.410762, -465042.880087], "DPA LOS ORGANOS","Piura",""];   //DPA LOS ORGANOSORGANOS';
+ports[45] = [ [-9039901.587175, -471922.212633], "DPA EL ÑURO","Piura",""];  //DPA EL ÑUROÑURO';
+ports[46] = [ [-9048462.534343, -504637.260739], "MUELLE TERMINA PESQUERO ZONAL DE TALARA","Piura",""];   //MUELLE TERMINAL PESQUERO ZONAL DE TALARA
+ports[47] = [ [-9023696.937178, -560283.417330], "MUELLE IBT","Piura",""];  //MUELLE IBTIBT';
+ports[48] = [ [-9031187.765950, -565481.135254], "DPA MI MANUELITO","Piura",""];   //DPA MI MANUELITOMANUELITO';
+ports[49] = [ [-9036079.735760, -572666.215913], "MUELLE DE PESQ. HAYDUK S.A.","Piura",""];   //MUELLE DE PESQ HAYDUK SA
+ports[50] = [ [-9035621.113591, -574194.956478], "MUELLE DE ESTACION NAVAL DE PAITA","Piura",""];   //MUELLE DE ESTACION NAVAL DE PAITA
+ports[51] = [ [-9035621.113591, -576793.815440], "MUELLE CONSERVERA LAS AMERICAS","Piura",""];   //MUELLE CONSERVERA LAS AMERICASLAS AMERICAS';
+ports[52] = [ [-9036538.357930, -578169.681949], "MUELLE DE INDUSTRIA ATUNERA","Piura",""];   //MUELLE DE INDUSTRIA ATUNERAINDUSTRIA ATUNERA';
+ports[53] = [ [-9038067.098496, -580309.918741], "MUELLE DE PESQ. NIVAMA","Piura",""];   //MUELLE DE PESQ NIVAMAPESQUERA NIVAMA';
+ports[54] = [ [-9036385.483874, -582755.903646], "MUELLE DE IND PESQ. SANTA MONICA","Piura",""];   //MUELLE DE IND PESQ SANTA MONICA
+ports[55] = [ [-9026601.544253, -591316.850814], "MUELLE DE PESQ. EXALMAR","Piura",""];   //MUELLE DE PESQ. EXALMAR.PESQ. EXALMAR';
+ports[56] = [ [-9001377.324919, -624949.143260], "MUELLE PESCA Y TRANSPORTE SA","Piura",""];   //MUELLE PESCA Y TRANSPORTE SA (EX DP JUAN PABLO)
+ports[57] = [ [-9012537.131049, -652160.725329], "MUELLE GALILEO","Piura",""];   //ALILEO';
 
 
 
 //-TYPE 3 : PESCA CON CHINCHORRO Y EXPLOSIVOS
-var tnt=[];
-
+var tnt=[[],[],[],[]];
 //ANCASH
-tnt[0] = [-8744224.052511, -1025632.045530];
-tnt[1] = [-8742695.311945, -1025632.045530];
-tnt[2] = [-8740879.932523, -1025956.902901];
-tnt[3] = [-8739312.973443, -1026778.600955];
-tnt[4] = [-8734086.591634, -1042486.410267];
-tnt[5] = [-8729667.575936, -1053221.035427];
-tnt[6] = [-8729079.966282, -1053827.754339];
-tnt[7] = [-8727761.427544, -1059359.884261];
-tnt[8] = [-8727207.259089, -1060945.952598];
-tnt[9] = [-8726872.847090, -1062379.146879];
-tnt[10] = [-8725974.712007, -1065685.048352];
-tnt[11] = [-8725477.871324, -1067213.788918];
-tnt[12] = [-8716802.268613, -1084029.935140];
+tnt[0] = [[-8744224.052511, -1025632.045530], "Pesca con explosivos", "Ancash", "Pesca con explosivos y Chinchorro"];
+tnt[1] = [[-8742695.311945, -1025632.045530], "Pesca con explosivos", "Ancash", "Pesca con explosivos y Chinchorro"];
+tnt[2] = [[-8740879.932523, -1025956.902901], "Pesca con explosivos", "Ancash", "Pesca con explosivos y Chinchorro"];
+tnt[3] = [[-8739312.973443, -1026778.600955], "Pesca con explosivos", "Ancash", "Pesca con explosivos y Chinchorro"];
+tnt[4] = [[-8734086.591634, -1042486.410267], "Pesca con explosivos", "Ancash", "Pesca con explosivos y Chinchorro"];
+tnt[5] = [[-8729667.575936, -1053221.035427], "Pesca con explosivos", "Ancash", "Pesca con explosivos y Chinchorro"];
+tnt[6] = [[-8729079.966282, -1053827.754339], "Pesca con explosivos", "Ancash", "Pesca con explosivos y Chinchorro"];
+tnt[7] = [[-8727761.427544, -1059359.884261], "Pesca con explosivos", "Ancash", "Pesca con explosivos y Chinchorro"];
+tnt[8] = [[-8727207.259089, -1060945.952598], "Pesca con explosivos", "Ancash", "Pesca con explosivos y Chinchorro"];
+tnt[9] = [[-8726872.847090, -1062379.146879], "Pesca con explosivos", "Ancash", "Pesca con explosivos y Chinchorro"];
+tnt[10] = [[-8725974.712007, -1065685.048352], "Pesca con explosivos", "Ancash", "Pesca con explosivos y Chinchorro"];
+tnt[11] = [[-8725477.871324, -1067213.788918], "Pesca con explosivos", "Ancash", "Pesca con explosivos y Chinchorro"];
+tnt[12] = [[-8716802.268613, -1084029.935140], "Pesca con explosivos", "Ancash", "Pesca con explosivos y Chinchorro"];
+
+
+//ICA
+tnt[13] = [[-8488962.596552, -1580392.887567], "Pesca con explosivos", "Ica", "Pesca con explosivos Salinas de Otuma"];
+tnt[14] = [[-1580392.887567, -1622567.017924], "Pesca con explosivos", "Ica", "Pesca con Chinchorro Barlovento"];
+
 //CORREGIR CASI TODO
 //tnt[0] = [-87471468842, -9995618885];
 
@@ -279,26 +202,19 @@ tnt[12] = [-8716802.268613, -1084029.935140];
 
 
 //-TYPE 0: OPERATIVOS EN CARRETERAS
-var car=[];
-
-var cartman=[[],[],[],[]];
+var cars=[[],[],[],[]];
 
 
 //ANCASH
-car[0] = [-8747147.768842, -999567.018885];
-car[1] = [-8751256.259113, -1009924.236218];
-car[2] = [-8746975.785529, -1015790.778139];
-car[3] = [-8735682.214600, -1026434.634327];
-car[4] = [-8723547.836359, -1053818.199711];
-
-
 //COORDENADAS, NOMBRE, REGION, DESCRIPCION
-cartman[0] = [ [-8747147.768842, -999567.018885], "Pesca con esxplivos", "Ancash", "Pesca explsiva"];
-cartman[1] = [ [-8751256.259113, -1009924.236218], "a con esxplivos", "Ancash", "Pesca explosiva"];
-cartman[2] = [ [-8746975.785529, -1015790.778139], "Pen eplivos", "Ancash", "Pesca explsiva kBUM"];
-cartman[3] = [ [-8735682.214600, -1026434.634327], "Pescn esxplivos", "Ancash", "Pesca explsiva JE"];
-cartman[4] = [ [-8723547.836359, -1053818.199711], "Pesxplivos", "Ancash", "Pesca explsivaaaaaaa"];
+cars[0] = [ [-8747147.768842, -999567.018885], "Operativos en carreteras", "Ancash", "Puntos de control en carreteras Alto Perú"];
+cars[1] = [ [-8751256.259113, -1009924.236218], "Operativos en carreteras", "Ancash", "Puntos de control en carreteras Panamericana Norte"];
+cars[2] = [ [-8746975.785529, -1015790.778139], "Operativos en carreteras", "Ancash", "Puntos de control en carreteras Av. Enrique Meiggs"];
+cars[3] = [ [-8735682.214600, -1026434.634327], "Operativos en carreteras", "Ancash", "Puntos de control en carreteras Panamericana Norte"];
+cars[4] = [ [-823547.836359, -1053818.199711], "Operativos en carreteras", "Ancash", "Puntos de control en carreteras Panamericana Norte"];
 
+//ICA
+cars[5] = [ [-8448947.812245, -1566481.348419], "Punto Fijo de control Peaje Villacuri", "Ica", "Falta de apoyo policial para intervención"];
 
 
 
@@ -322,8 +238,8 @@ cartman[4] = [ [-8723547.836359, -1053818.199711], "Pesxplivos", "Ancash", "Pesc
 map.projection
 
   // CLUSTER PARA EL DPA
-  var D = dpa.length;
-  var C = car.length;
+  var D = ports.length;
+  var C = cars.length;
   var T = tnt.length;
 
   function addFeatures(nb) {
@@ -332,26 +248,32 @@ map.projection
 
     //PARA PUERTOS
     for (var i=0; i<=D-1; ++i) {
-      features[i] = new ol.Feature(new ol.geom.Point(dpa[i]));
+      features[i] = new ol.Feature(new ol.geom.Point(ports[i][0]));
       features[i].set('id',i);
-      features[i].set('type', 1);
-            features[i].set('name', dpaname[i]);   //Cantidad de colores, clases de clousters
+      features[i].set('type', 1); 
+      features[i].set('name', ports[i][1]);  //Cantidad de colores, clases de clousters
+      features[i].set('region', ports[i][2]);
+      features[i].set('description', ports[i][3]);
     }
 
     //PARA OPERATIVOS EN CARRETERA
     for (var i=0; i<=C-1; ++i) {
-      features[i+D] = new ol.Feature(new ol.geom.Point(car[i]));
+      features[i+D] = new ol.Feature(new ol.geom.Point(cars[i][0]));
       features[i+D].set('id',i+D);
       features[i+D].set('type', 0); 
-      features[i+D].set('name', 'Operativos en carreteras');  //Cantidad de colores, clases de clousters
+      features[i+D].set('name', cars[i][1]);  //Cantidad de colores, clases de clousters
+      features[i+D].set('region', cars[i][2]);
+      features[i+D].set('description', cars[i][3]);
     }
 
     //PARA PESCA CON EXPLOSIVOS Y CHINCHORRO
     for (var i=0; i<=T-1; ++i) {
-      features[i+D+C] = new ol.Feature(new ol.geom.Point(tnt[i]));
-      features[i+D+C].set('id',i+D+C);
+      features[i+D+C] = new ol.Feature(new ol.geom.Point(tnt[i][0]));
+      features[i+D+C].set('id',i+D);
       features[i+D+C].set('type', 2); 
-      features[i+D+C].set('name', 'Pesca con Chinchorro y Explosivos');  //Cantidad de colores, clases de clousters
+      features[i+D+C].set('name', tnt[i][1]);  //Cantidad de colores, clases de clousters
+      features[i+D+C].set('region', tnt[i][2]);
+      features[i+D+C].set('description', tnt[i][3]);
     }
 
 
@@ -406,7 +328,7 @@ map.projection
   }
 
   // Style for the features
-  var form = ['bus', 'harbor', 'cemetery', 'cafe'];
+  var form = ['bus', 'harbor', 'danger', 'cafe'];
   function featureStyle(f) {
     var sel = f.get('features')
     if (sel) {
@@ -478,12 +400,31 @@ map.projection
         //"<i class='maki-"+form[feature.get('type')]+"' style='color:"+color+"'></i>"+
         //"One feature selected...<br/>(type="+ feature.get('name')+")"
 
-        "<i class='maki-"+form[feature.get('type')]+"' style='color:"+color+"'></i>"+
-        "<br/>"+ feature.get('name')
+        //"<i class='maki-"+form[feature.get('type')]+"' style='color:"+color+"'></i>"+feature.get('name')+
+        "<table>"+
+  "<thead> <p> <i class='maki-"+form[feature.get('type')]+"' style='color:"+color+"'></i>"+feature.get('name')+ "</p> </thead>"+
+   " <tbody>"+
+    "<tr>"+
+      "<td style='color:#0F51D6; font-weight: bold;'>Región:</td>"+
+      "<td>" +feature.get('region')+ "</td>"+
+    "</tr>"+
+    "<tr>"+
+      "<td style='color:#0F51D6; font-weight: bold;'>Descripción:</td>"+
+      "<td>" +feature.get('description')+ "</td>"+
+    "</tr>"+
+        "<tr>"+
+      "<td style='color:#0F51D6; font-weight: bold;'>Coordinadores:</td>"+
+      "<td> </td>"+
+    "</tr>"+
+  "</tbody>"+
+"</table>"
       );
-    } else {
-      $(".infos").text("Cluster ("+c.length+" features)");
-    }
+
+
+
+    } //else {
+      //$(".infos").text("Cluster ("+c.length+" features)");
+    //}
   })
   selectCluster.getFeatures().on(['remove'], function (e) {
     $(".infos").html("");
