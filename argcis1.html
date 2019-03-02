@@ -39,6 +39,7 @@
     ) {
 
       const url =
+       //LINK DE LA DATA EN CSV (RAW)
 "https://raw.githubusercontent.com/luiszac/Adult-Census-Income-Project/master/2.5_weekin.csv";
       // Paste the url into a browser's address bar to download and view the attributes
       // in the CSV file. These attributes include:
@@ -59,6 +60,7 @@
 
       const renderer = {
         type: "heatmap",
+        //CAMBIAR COLORES EN LA CONCENTRACION (ROJO A VERDE)
         colorStops: [
     { ratio: 0, color: "rgba(85, 255, 0, 0)" },
     { ratio: 0.1, color: "rgba(128, 255, 0, 1)" },
@@ -73,13 +75,13 @@
     { ratio: 1, color: "rgba(255, 0, 0, 1)" }
   ],
         maxPixelIntensity: 20,
-        minPixelIntensity: 0,
-        blurRadius: 1.7,
+        minPixelIntensity: 0, 
+        blurRadius: 1.7, //RADIO DE LOS PUNTOS
       };
 
       const layer = new CSVLayer({
         url: url,
-        title: "Concentración de actividad pesquera - Anguila Noviembre",
+        title: "Concentración de actividad pesquera - Anguila Noviembre",  //LEYENDA
         copyright: "SISESAT-lhuaringa",
         popupTemplate: template,
         renderer: renderer
@@ -89,12 +91,14 @@
 
 
       const map = new Map({
+        //TIPO DE MAPA BASE
         basemap: "topo", //hybrid
         layers: [layer]
 
       });
 
       const view = new MapView({
+        //VISTA DEL MAPA
         container: "viewDiv",
         center: [-81, -5],
         zoom: 9,
@@ -103,7 +107,7 @@
 
       view.ui.add(new Legend({
         view: view
-      }), "bottom-left");
+      }), "bottom-left"); //bottom-right - upper-left 
 
     });
   </script>
