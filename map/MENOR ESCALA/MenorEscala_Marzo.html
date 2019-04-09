@@ -1,0 +1,120 @@
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="initial-scale=1,maximum-scale=1,user-scalable=no">
+
+  <!--
+  ArcGIS API for JavaScript, https://js.arcgis.com
+  For more information about the visualization-heatmap sample, read the original sample description at developers.arcgis.com.
+  https://developers.arcgis.com/javascript/latest/sample-code/visualization-heatmap/index.html
+  -->
+<title>Concentración actividad de embarcaciones de menor escala - Marzo </title>
+
+  <link rel="stylesheet" href="https://js.arcgis.com/4.10/esri/css/main.css">
+
+  <style>
+    html,
+    body,
+    #viewDiv {
+      padding: 0;
+      margin: 0;
+      height: 100%;
+      width: 100%;
+    }
+  </style>
+
+  <script src="https://js.arcgis.com/4.10/"></script>
+
+  <script>
+    require([
+      "esri/Map",
+      "esri/layers/CSVLayer",
+      "esri/views/MapView",
+      "esri/widgets/Legend"
+    ], function(
+      Map,
+      CSVLayer,
+      MapView,
+      Legend
+    ) {
+
+      const url =
+       //LINK DE LA DATA EN CSV (RAW)
+      "https://raw.githubusercontent.com/luiszac/luiszac.github.io/master/css/DATA_MENORESC_MARZ.csv";
+      // Paste the url into a browser's address bar to download and view the attributes
+      // in the CSV file. These attributes include:
+      // * mag - magnitude
+      // * type - earthquake or other event such as nuclear test
+      // * place - location of the event
+      // * time - the time of the event
+
+      const template = {
+        title: "{place}",
+        content: "Magnitude {mag} {type} hit {place} on {time}."
+      };
+
+      // The heatmap renderer assigns each pixel in the view with
+      // an intensity value. The ratio of that intensity value
+      // to the maxPixel intensity is used to assign a color
+      // from the continuous color ramp in the colorStops property
+
+      const renderer = {
+        type: "heatmap",
+        //CAMBIAR COLORES EN LA CONCENTRACION (ROJO A VERDE)
+        colorStops: [
+    { ratio: 0, color: "rgba(85, 255, 0, 0)" },
+    { ratio: 0.1, color: "rgba(128, 255, 0, 1)" },
+    { ratio: 0.2, color: "rgba(170, 255, 0, 1)" },
+    { ratio: 0.3, color: "rgba(212, 255, 0, 1)" },
+    { ratio: 0.4, color: "rgba(255, 255, 0, 1)" },
+    { ratio: 0.5, color: "rgba(255, 213, 0, 1)" },
+    { ratio: 0.6, color: "rgba(255, 170, 0, 1)" },
+    { ratio: 0.7, color: "rgba(255, 128, 0, 1)" },
+    { ratio: 0.8, color: "rgba(255, 85, 0, 1)" },
+    { ratio: 0.9, color: "rgba(255, 42, 0, 1)" },
+    { ratio: 1, color: "rgba(255, 0, 0, 1)" }
+  ],
+        maxPixelIntensity: 1700,
+        minPixelIntensity: 0, 
+        blurRadius: 4.4, //RADIO DE LOS PUNTOS
+      };
+
+      const layer = new CSVLayer({
+        url: url,
+        title: "Concentración de actividad pesquera - Menor escala Marzo",  //LEYENDA
+        copyright: "SISESAT-lhuaringa",
+        popupTemplate: template,
+        renderer: renderer
+      });
+
+   
+
+
+      const map = new Map({
+        //TIPO DE MAPA BASE
+        basemap: "osm", //hybrid
+        layers: [layer]
+
+      });
+
+      const view = new MapView({
+        //VISTA DEL MAPA
+        container: "viewDiv",
+        center: [-77, -8],
+        zoom: 7,
+        map: map
+      });
+
+      view.ui.add(new Legend({
+        view: view
+      }), "bottom-left"); //bottom-right - upper-left 
+
+    });
+  </script>
+</head>
+
+<body>
+  <div id="viewDiv"></div>
+</body>
+
+</html>
